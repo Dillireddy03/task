@@ -1,255 +1,273 @@
+function showQuestion(question, code, output, explanation) {
 
-  function showQuestion(question, code, output, explanation) {
+  // Create main box
+  let box = document.createElement("div");
+  box.className = "box";
 
-    let div = document.createElement("div");
-    div.className = "box";
+  // Question heading
+  let heading = document.createElement("h3");
+  heading.textContent = question;
 
-    div.innerHTML =
-      "<h3>" + question + "</h3>" +
-      "<pre>" + code + "</pre>" +
-      "<div class='output'>Output: " + output + "</div>" +
-      "<p>" + explanation + "</p>";
+  // Code block (IMPORTANT FIX)
+  let pre = document.createElement("pre");
+  pre.textContent = code;   // ✅ SAFE for < > loops
 
-    document.getElementById("content").appendChild(div);
-  }
+  // Output
+  let out = document.createElement("div");
+  out.className = "output";
+  out.textContent = "Output: " + output;
 
-  // 1
-  showQuestion(
-    "1. Merge two arrays using spread operator",
-    "let a = [1, 2, 3];\nlet b = [4, 5];\nlet result = [...a, ...b];",
-    "[1, 2, 3, 4, 5]",
-    "Here both arrays are joined together using spread operator."
-  );
+  // Explanation
+  let exp = document.createElement("p");
+  exp.textContent = explanation;
 
-  // 2
-  showQuestion(
-    "2. Clone an array using spread operator",
-    "let arr = [10, 20, 30];\nlet copy = [...arr];",
-    "[10, 20, 30]",
-    "Spread creates a new array, so original array is safe."
-  );
+  // Append everything
+  box.appendChild(heading);
+  box.appendChild(pre);
+  box.appendChild(out);
+  box.appendChild(exp);
 
-  // 3
-  showQuestion(
-    "3. Add values at beginning and end",
-    "let arr = [2, 3, 4];\nlet newArr = [1, ...arr, 5];",
-    "[1, 2, 3, 4, 5]",
-    "Value 1 is added in front and 5 is added at the end."
-  );
+  document.getElementById("content").appendChild(box);
+}
 
-  // 4
-  showQuestion(
-    "4. Merge two objects",
-    "let obj1 = {a:1, b:2};\nlet obj2 = {b:3, c:4};\nlet obj3 = {...obj1, ...obj2};",
-    "{a:1, b:3, c:4}",
-    "If same key exists, second object value replaces first."
-  );
+/* ================= QUESTIONS ================= */
 
-  // 5
-  showQuestion(
-    "5. Spread copy output",
-    "let a = [1,2,3];\nlet b = [...a];\nb.push(4);",
-    "[1, 2, 3]",
-    "Array a does not change because b is a copy."
-  );
+// 1
+showQuestion(
+  "1. Merge two arrays using spread operator",
+  "let a = [1, 2, 3];\nlet b = [4, 5];\nlet result = [...a, ...b];",
+  "[1, 2, 3, 4, 5]",
+  "Both arrays are joined into a new array using spread."
+);
 
-  // 6
-  showQuestion(
-    "6. Object spread override",
-    "let obj1 = {a:1, b:2};\nlet obj2 = {b:3, c:4};\nlet obj3 = {...obj1, ...obj2};",
-    "{a:1, b:3, c:4}",
-    "Later object value overrides earlier value."
-  );
+// 2
+showQuestion(
+  "2. Clone an array using spread operator",
+  "let arr = [10, 20, 30];\nlet copy = [...arr];",
+  "[10, 20, 30]",
+  "Spread creates a new array, so original is not changed."
+);
 
-  // 7
-  showQuestion(
-    "7. Function using rest operator",
-    "function showValues(...values) {\n  return values;\n}",
-    "[1, 2, 3]",
-    "Rest operator stores all values in an array."
-  );
+// 3
+showQuestion(
+  "3. Add values at beginning and end",
+  "let arr = [2, 3, 4];\nlet newArr = [1, ...arr, 5];",
+  "[1, 2, 3, 4, 5]",
+  "1 is added at start and 5 at end."
+);
 
-  // 8
-  showQuestion(
-    "8. Sum using rest operator",
-    "function sum(...nums) {\n  let total = 0;\n  for(let i=0; i<nums.length; i++){\n    total = total + nums[i];\n  }\n  return total;\n}",
-    "60",
-    "Loop is used to add each value."
-  );
+// 4
+showQuestion(
+  "4. Merge two objects",
+  "let obj1 = {a:1, b:2};\nlet obj2 = {b:3, c:4};\nlet obj3 = {...obj1, ...obj2};",
+  "{a:1, b:3, c:4}",
+  "Later object values override earlier ones."
+);
 
-  // 9
-  showQuestion(
-    "9. Rest operator output",
-    "function test(...a){\n  return a;\n}",
-    "[10, 20, 30]",
-    "All values are grouped into one array."
-  );
+// 5
+showQuestion(
+  "5. Spread copy output",
+  "let a = [1,2,3];\nlet b = [...a];\nb.push(4);",
+  "[1, 2, 3]",
+  "a does not change because b is a copy."
+);
 
-  // 10
-  showQuestion(
-    "10. Rest with normal parameters",
-    "function demo(x, y, ...z){\n  return z;\n}",
-    "[3, 4, 5]",
-    "First two go to x and y, rest go to z."
-  );
+// 6
+showQuestion(
+  "6. Object spread override",
+  "let obj1 = {a:1, b:2};\nlet obj2 = {b:3, c:4};\nlet obj3 = {...obj1, ...obj2};",
+  "{a:1, b:3, c:4}",
+  "Key b is overridden by second object."
+);
 
-  // 11
-  showQuestion(
-    "11. Array destructuring",
-    "let arr = [10,20,30,40];\nlet a = arr[0];\nlet b = arr[1];\nlet c = arr[2];\nlet d = arr[3];",
-    "10 20 30 40",
-    "Values are taken one by one using index."
-  );
+// 7
+showQuestion(
+  "7. Function using rest operator",
+  "function showValues(...values) {\n  return values;\n}\nshowValues(1,2,3);",
+  "[1, 2, 3]",
+  "Rest operator stores all values in an array."
+);
 
-  // 12
-  showQuestion(
-    "12. Object destructuring",
-    "let emp = {name:'John', age:25, role:'Dev'};\nlet name = emp.name;\nlet age = emp.age;\nlet role = emp.role;",
-    "John 25 Dev",
-    "Object values are accessed using dot notation."
-  );
+// 8 ✅ FIXED
+showQuestion(
+  "8. Sum using rest operator",
+  "function sum(...nums) {\n  let total = 0;\n  for(let i = 0; i < nums.length; i++){\n    total = total + nums[i];\n  }\n  return total;\n}\nsum(10,20,30);",
+  "60",
+  "Loop adds all values safely."
+);
 
-  // 13
-  showQuestion(
-    "13. a + c from array",
-    "let arr = [1,2,3];\nlet a = arr[0];\nlet c = arr[2];",
-    "4",
-    "First and last values are added."
-  );
+// 9
+showQuestion(
+  "9. Rest operator output",
+  "function test(...a){\n  return a;\n}\ntest(10,20,30);",
+  "[10, 20, 30]",
+  "All values are grouped into array."
+);
 
-  // 14
-  showQuestion(
-    "14. Multiply object values",
-    "let obj = {x:10, y:20};\nlet result = obj.x * obj.y;",
-    "200",
-    "Values are multiplied using dot operator."
-  );
+// 10
+showQuestion(
+  "10. Rest with normal parameters",
+  "function demo(x, y, ...z){\n  return z;\n}\ndemo(1,2,3,4,5);",
+  "[3, 4, 5]",
+  "Remaining values go into z."
+);
 
-  // 15
-  showQuestion(
-    "15. Access nested array value",
-    "let data = [1,2,[3,4,[5,6,7]]];\nlet value = data[2][2][2];",
-    "7",
-    "We go inside each array step by step."
-  );
+// 11
+showQuestion(
+  "11. Array destructuring",
+  "let arr = [10,20,30,40];\nlet a = arr[0];\nlet b = arr[1];\nlet c = arr[2];\nlet d = arr[3];",
+  "10 20 30 40",
+  "Values are accessed using index."
+);
 
-  // 16
-  showQuestion(
-    "16. Nested array destructuring",
-    "let val = [1,2,[3,4]];\nlet a = val[0];\nlet b = val[1];\nlet c = val[2][0];\nlet d = val[2][1];",
-    "1 2 3 4",
-    "Values are accessed using indexes."
-  );
+// 12
+showQuestion(
+  "12. Object destructuring",
+  "let emp = {name:'John', age:25, role:'Dev'};\nlet name = emp.name;\nlet age = emp.age;\nlet role = emp.role;",
+  "John 25 Dev",
+  "Dot notation is used."
+);
 
-  // 17
-  showQuestion(
-    "17. Nested array output",
-    "let arr = [1,[2,[3,4]]];\nlet result = arr[1][1][0];",
-    "3",
-    "Correct index path returns 3."
-  );
+// 13
+showQuestion(
+  "13. a + c from array",
+  "let arr = [1,2,3];\nlet result = arr[0] + arr[2];",
+  "4",
+  "First and last values are added."
+);
 
-  // 18
-  showQuestion(
-    "18. pop() method",
-    "let a = [1,2,3,4];\na.pop();",
-    "[1, 2, 3]",
-    "pop removes last element."
-  );
+// 14
+showQuestion(
+  "14. Multiply object values",
+  "let obj = {x:10, y:20};\nlet result = obj.x * obj.y;",
+  "200",
+  "Values are multiplied."
+);
 
-  // 19
-  showQuestion(
-    "19. unshift() method",
-    "let a = [1,2,3];\na.unshift(0);",
-    "[0, 1, 2, 3]",
-    "unshift adds element at beginning."
-  );
+// 15
+showQuestion(
+  "15. Access nested array value",
+  "let data = [1,2,[3,4,[5,6,7]]];\nlet value = data[2][2][2];",
+  "7",
+  "Indexes are followed step by step."
+);
 
-  // 20
-  showQuestion(
-    "20. push() method",
-    "let a = [1,2,3];\na.push(4);\na.push(5);",
-    "[1, 2, 3, 4, 5]",
-    "push adds elements at end."
-  );
+// 16
+showQuestion(
+  "16. Nested array values",
+  "let val = [1,2,[3,4]];\nlet a = val[0];\nlet b = val[1];\nlet c = val[2][0];\nlet d = val[2][1];",
+  "1 2 3 4",
+  "Nested indexes are used."
+);
 
-  // 21
-  showQuestion(
-    "21. splice() method",
-    "let a = [10,20,30,40];\na.splice(1,2,99);",
-    "[10, 99, 40]",
-    "splice removes values and inserts new one."
-  );
+// 17
+showQuestion(
+  "17. Nested output",
+  "let arr = [1,[2,[3,4]]];\nlet result = arr[1][1][0];",
+  "3",
+  "Correct index path."
+);
 
-  // 22
-  showQuestion(
-    "22. slice() method",
-    "let a = [1,2,3,4,5];\nlet result = a.slice(1,4);",
-    "[2, 3, 4]",
-    "slice returns selected part."
-  );
+// 18
+showQuestion(
+  "18. pop() method",
+  "let a = [1,2,3,4];\na.pop();",
+  "[1, 2, 3]",
+  "Last element removed."
+);
 
-  // 23
-  showQuestion(
-    "23. concat() method",
-    "let a = [1,2];\nlet b = [3,4];\nlet c = a.concat(b);",
-    "[1, 2, 3, 4]",
-    "concat joins two arrays."
-  );
+// 19
+showQuestion(
+  "19. unshift() method",
+  "let a = [1,2,3];\na.unshift(0);",
+  "[0, 1, 2, 3]",
+  "Value added at start."
+);
 
-  // 24
-  showQuestion(
-    "24. flat() method",
-    "let a = [1,[2,[3,4]]];\nlet result = a.flat(2);",
-    "[1, 2, 3, 4]",
-    "flat removes nested arrays."
-  );
+// 20
+showQuestion(
+  "20. push() method",
+  "let a = [1,2,3];\na.push(4);\na.push(5);",
+  "[1, 2, 3, 4, 5]",
+  "Values added at end."
+);
 
-  // 25
-  showQuestion(
-    "25. fill() method",
-    "let a = [1,2,3,4];\na.fill(0,1,3);",
-    "[1, 0, 0, 4]",
-    "fill replaces values in given range."
-  );
+// 21
+showQuestion(
+  "21. splice() method",
+  "let a = [10,20,30,40];\na.splice(1,2,99);",
+  "[10, 99, 40]",
+  "Values removed and inserted."
+);
 
-  // 26
-  showQuestion(
-    "26. indexOf() method",
-    "let a = [1,2,3,2,1];\nlet index = a.indexOf(2);",
-    "1",
-    "Returns first matching index."
-  );
+// 22
+showQuestion(
+  "22. slice() method",
+  "let a = [1,2,3,4,5];\nlet result = a.slice(1,4);",
+  "[2, 3, 4]",
+  "Returns selected part."
+);
 
-  // 27
-  showQuestion(
-    "27. lastIndexOf() method",
-    "let a = [1,2,3,2,1];\nlet index = a.lastIndexOf(2);",
-    "3",
-    "Returns last matching index."
-  );
+// 23
+showQuestion(
+  "23. concat() method",
+  "let a = [1,2];\nlet b = [3,4];\nlet c = a.concat(b);",
+  "[1, 2, 3, 4]",
+  "Arrays joined."
+);
 
-  // 28
-  showQuestion(
-    "28. sort() default",
-    "let a = [10,2,5,1];\na.sort();",
-    "[1, 10, 2, 5]",
-    "Sort works like string sorting by default."
-  );
+// 24
+showQuestion(
+  "24. flat() method",
+  "let a = [1,[2,[3,4]]];\nlet result = a.flat(2);",
+  "[1, 2, 3, 4]",
+  "Nested arrays removed."
+);
 
-  // 29
-  showQuestion(
-    "29. Numeric sort",
-    "let a = [10,2,5,1];\na.sort(function(x,y){ return x-y; });",
-    "[1, 2, 5, 10]",
-    "Function tells how numbers should be compared."
-  );
+// 25
+showQuestion(
+  "25. fill() method",
+  "let a = [1,2,3,4];\na.fill(0,1,3);",
+  "[1, 0, 0, 4]",
+  "Values replaced."
+);
 
-  // 30
-  showQuestion(
-    "30. Spread + rest",
-    "let a = [1,2,3];\nlet b = [...a,4,5];\nlet x = b[0];\nlet y = b[1];\nlet z = b.slice(2);",
-    "1 2 [3,4,5]",
-    "Remaining values are stored using slice."
-  );
+// 26
+showQuestion(
+  "26. indexOf() method",
+  "let a = [1,2,3,2,1];\nlet index = a.indexOf(2);",
+  "1",
+  "First match returned."
+);
 
+// 27
+showQuestion(
+  "27. lastIndexOf() method",
+  "let a = [1,2,3,2,1];\nlet index = a.lastIndexOf(2);",
+  "3",
+  "Last match returned."
+);
+
+// 28
+showQuestion(
+  "28. sort() default",
+  "let a = [10,2,5,1];\na.sort();",
+  "[1, 10, 2, 5]",
+  "Sorted as strings."
+);
+
+// 29
+showQuestion(
+  "29. Numeric sort",
+  "let a = [10,2,5,1];\na.sort(function(x,y){ return x-y; });",
+  "[1, 2, 5, 10]",
+  "Numeric comparison used."
+);
+
+// 30
+showQuestion(
+  "30. Spread + rest",
+  "let a = [1,2,3];\nlet b = [...a,4,5];\nlet x = b[0];\nlet y = b[1];\nlet z = b.slice(2);",
+  "1 2 [3,4,5]",
+  "Remaining values separated."
+);
