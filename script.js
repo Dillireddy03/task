@@ -1,27 +1,27 @@
 function showQuestion(question, code, output, explanation) {
 
-  // Create main box
+
   let box = document.createElement("div");
   box.className = "box";
 
-  // Question heading
+
   let heading = document.createElement("h3");
   heading.textContent = question;
 
-  // Code block (IMPORTANT FIX)
-  let pre = document.createElement("pre");
-  pre.textContent = code;   // ✅ SAFE for < > loops
 
-  // Output
+  let pre = document.createElement("pre");
+  pre.textContent = code;  
+
+
   let out = document.createElement("div");
   out.className = "output";
   out.textContent = "Output: " + output;
 
-  // Explanation
+
   let exp = document.createElement("p");
   exp.textContent = explanation;
 
-  // Append everything
+
   box.appendChild(heading);
   box.appendChild(pre);
   box.appendChild(out);
@@ -88,7 +88,7 @@ showQuestion(
   "Rest operator stores all values in an array."
 );
 
-// 8 ✅ FIXED
+// 8 
 showQuestion(
   "8. Sum using rest operator",
   "function sum(...nums) {\n  let total = 0;\n  for(let i = 0; i < nums.length; i++){\n    total = total + nums[i];\n  }\n  return total;\n}\nsum(10,20,30);",
@@ -271,3 +271,4 @@ showQuestion(
   "1 2 [3,4,5]",
   "Remaining values separated."
 );
+
